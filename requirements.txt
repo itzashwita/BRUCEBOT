@@ -1,7 +1,11 @@
+streamlit
+numpy
+Pillow
+opencv-python==0.0.0
+# Force headless OpenCV only (avoid libGL issues)
+opencv-python-headless==4.8.1.78
+
+# Ultralytics + Torch (CPU-friendly pins)
 ultralytics==8.0.227
 torch==2.0.1
 torchvision==0.15.2
-opencv-python-headless==4.8.1.78
-numpy
-Pillow
-streamlit
