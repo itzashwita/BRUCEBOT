@@ -231,14 +231,18 @@ if mode == "Upload Image":
     uploaded_img = st.file_uploader("📸 Upload Underwater Image", type=["jpg", "jpeg", "png"])
 
     if uploaded_img and st.session_state["name"] and st.session_state["country"] and st.session_state["consent"]:
-        # Save image once (per visitor session)
+        # ✅ Save image once (per visitor session)
         if not st.session_state["image_saved"]:
             ext = os.path.splitext(uploaded_img.name)[1].lower()
             if ext not in [".jpg", ".jpeg", ".png"]:
                 ext = ".jpg"
 
-            safe_name = "".join([c for c in st.session_state["name"] if c.isalnum() or c in (" ", "_", "-")]).strip()
-            safe_country = "".join([c for c in st.session_state["country"] if c.isalnum() or c in (" ", "_", "-")]).strip()
+            safe_name = "".join(
+                [c for c in st.session_state["name"] if c.isalnum() or c in (" ", "_", "-")]
+            ).strip()
+            safe_country = "".join(
+                [c for c in st.session_state["country"] if c.isalnum() or c in (" ", "_", "-")]
+            ).strip()
 
             filename = f"{visitor_id:06d}_{safe_name}_{safe_country}{ext}".replace(" ", "_")
             save_path = os.path.join(UPLOAD_DIR, filename)
@@ -258,30 +262,35 @@ if mode == "Upload Image":
                 },
             )
 
-        img = Image.open(uploaded_img)
+        # ✅ Always load as RGB (prevents odd color modes / alpha issues)
+        img = Image.open(uploaded_img).convert("RGB")
 
-        with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as temp:
-            temp.write(uploaded_img.getvalue())
-            temp_path = temp.name
-
-        results = model(temp_path)
+        # ✅ Run YOLO directly on the PIL image (no temp file needed)
+        # (Ultralytics can take PIL, numpy, or path)
+        results = model.predict(img, conf=0.25)
 
         col1, col2 = st.columns(2)
+
         with col1:
             st.markdown('<div class="image-box">', unsafe_allow_html=True)
-            st.image(img, caption="🌊 Original Image", use_container_width=True)
+            st.image(img, caption="🌊 Original Image", use_column_width=True)
             st.markdown("</div>", unsafe_allow_html=True)
+
         with col2:
+            # results is a list-like of Results objects
             for r in results:
-                output = r.plot()
+                output = r.plot()          # numpy array in BGR
+                output = output[..., ::-1] # ✅ convert BGR -> RGB for correct colors
+
                 st.markdown('<div class="image-box">', unsafe_allow_html=True)
-                st.image(output, caption="🤖 AI Detection Result", use_container_width=True)
+                st.image(output, caption="🤖 AI Detection Result", use_column_width=True)
                 st.markdown("</div>", unsafe_allow_html=True)
 
         detection_shown = True
 
     elif uploaded_img:
         st.warning("⚠️ Please enter Name, Country, and Consent first!")
+
 
 # ---- Upload Video (NOT SAVED)
 elif mode == "Upload Video":
