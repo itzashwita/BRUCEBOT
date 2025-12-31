@@ -16,7 +16,7 @@ except Exception:
 # -------------------------------
 # ✅ PAGE CONFIG
 # -------------------------------
-st.set_page_config(page_title="Underwater Trash Detection", layout="wide")
+st.set_page_config(page_title="BRUCEBOT-Underwater Trash Detection", layout="wide")
 
 # -------------------------------
 # ✅ PATHS / STORAGE
@@ -207,8 +207,8 @@ if submitted:
 
 # -------------------------------
 # ✅ LOAD YOLO MODEL
-# -------------------------------
-MODEL_PATH = r"C:\Users\raara\runs\detect\train13\weights\best.pt"
+# ---------------train13----------------
+MODEL_PATH = ./train13/weights/best.pt"
 model = YOLO(MODEL_PATH)
 
 # -------------------------------
