@@ -208,7 +208,7 @@ if submitted:
 # -------------------------------
 # ✅ LOAD YOLO MODEL
 # ---------------train13----------------
-MODEL_PATH = ./train13/weights/best.pt"
+MODEL_PATH = ./train13/weights/best.pt
 model = YOLO(MODEL_PATH)
 
 # -------------------------------
