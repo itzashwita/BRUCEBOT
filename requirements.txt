@@ -1,7 +1,7 @@
 streamlit
 numpy
 Pillow
-opencv-python==0.0.0
+
 # Force headless OpenCV only (avoid libGL issues)
 opencv-python-headless==4.8.1.78
 
