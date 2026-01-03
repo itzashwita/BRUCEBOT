@@ -8,3 +8,5 @@ pandas
 numpy
 matplotlib
 openpyxl==3.1.2
+streamlit-webrtc
+av
