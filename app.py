@@ -125,7 +125,8 @@ body { background: linear-gradient(to right, #1fa2ff, #12d8fa, #a6ffcb); }
 # -------------------------------
 # ✅ HEADER
 # -------------------------------
-st.markdown('<div class="title-box">Ashwita Ramanavelan Science Fair Project</div>', unsafe_allow_html=True)
+st.markdown('<div class="title-box">Ashwita Ramanavelan Dallas Science Fair Project</div>', unsafe_allow_html=True)
+st.markdown('<div class="title-box">BRUCE BOT - BIG ROBOT UNDER WATER CLEANING ENVIRONMENT </div>', unsafe_allow_html=True)
 st.markdown(f'<div class="visitor-box">👥 Total Visitors: {visitor_id}</div>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">Enter your details and upload an underwater image/video, or use real-time camera</p>', unsafe_allow_html=True)
 
