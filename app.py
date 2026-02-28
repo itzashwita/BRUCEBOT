@@ -274,7 +274,7 @@ if mode == "Upload Image":
 
         with col1:
             st.markdown('<div class="image-box">', unsafe_allow_html=True)
-            st.image(img, caption="🌊 Original Image", use_column_width=True,use_column_width=True)
+            st.image(img, caption="🌊 Original Image",use_column_width=True)
             st.markdown("</div>", unsafe_allow_html=True)
 
         with col2:
@@ -284,7 +284,7 @@ if mode == "Upload Image":
                 output = output[..., ::-1] # ✅ convert BGR -> RGB for correct colors
 
                 st.markdown('<div class="image-box">', unsafe_allow_html=True)
-                st.image(output, caption="🤖 AI Detection Result", use_column_width=True,use_column_width=True)
+                st.image(output, caption="🤖 AI Detection Result",use_column_width=True)
                 st.markdown("</div>", unsafe_allow_html=True)
 
         detection_shown = True
